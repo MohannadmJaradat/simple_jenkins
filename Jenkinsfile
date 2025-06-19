@@ -42,5 +42,9 @@ pipeline {
         fixed {
             echo "This will run if the previous run failed or unstable and now is successful"
         }
+        cleanup {
+            echo "Cleaning the workspace...."
+            cleanWs()
+        }
     }
 }
