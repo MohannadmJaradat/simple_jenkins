@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        AUTHOR_NAME='Mohannad Jaradat'
+    }
     stages {
         stage("Build") {
             steps {
@@ -9,6 +12,7 @@ pipeline {
                     df -h
                     echo "Done executing df -h"
                 '''
+                echo "The author's name is: ${AUTHOR_NAME}"
             }
         }
         stage("Test") {
