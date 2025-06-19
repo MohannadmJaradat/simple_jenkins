@@ -6,6 +6,11 @@ pipeline {
         AWS_SECRET_ACCESS_KEY_ID= credentials('aws-secret-access-key')
     }
     stages {
+        stage('Checkout') {
+            steps {
+                git 'git@github.com:mohannad-jaradat/simple_jenkins.git'
+            }
+        }
         stage("Build") {
             steps {
                 echo "Building the app..."
