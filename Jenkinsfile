@@ -4,27 +4,39 @@ pipeline {
         AUTHOR_NAME='Mohannad Jaradat'
         AWS_ACCESS_KEY_ID= credentials('aws-access-key-id')
         AWS_SECRET_ACCESS_KEY_ID= credentials('aws-secret-access-key')
+        DEPLOY_BRANCH = "deploy-py-app"
     }
     stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
         stage("Build") {
             steps {
                 echo "Building the app..."
                 sh '''
-                    echo "Executing df -h"
-                    df -h
-                    echo "Done executing df -h"
+                    python3 -m venv venv
+                    source venv/bin/activate
+                    pip install -r requirements.txt
                 '''
                 echo "The author's name is: ${AUTHOR_NAME}"
             }
         }
         stage("Test") {
             steps {
-                echo "Testing the app..."
+                sh '''
+                    source venv/bin/activate
+                    pytest
+                '''
             }
         }
         stage("Deploy") {
             steps {
-                echo "Deploying the app..."
+                sh '''
+                    ssh -o StrictHostKeyChecking=no ubuntu@54.89.162.181 \
+                    'bash -s' < deploy.sh $DEPLOY_BRANCH
+                '''
             }
         }
     }
