@@ -46,6 +46,9 @@ pipeline {
             mail to: 'mohannad.jaradat@cirrusgo.com',
             subject: "✅ Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
             body: "The build was successful.\n\nSee: ${env.BUILD_URL}"
+            git(
+                echo "This was triggered by ${env.BRANCH_NAME}"
+            )
         }
         failure {
             echo "This will run if the job failed"
