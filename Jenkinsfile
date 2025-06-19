@@ -4,7 +4,7 @@ pipeline {
         AUTHOR_NAME='Mohannad Jaradat'
         AWS_ACCESS_KEY_ID= credentials('aws-access-key-id')
         AWS_SECRET_ACCESS_KEY_ID= credentials('aws-secret-access-key')
-        DEPLOY_BRANCH = "deploy-py-app"
+        DEPLOY_BRANCH = "main"
     }
     stages {
         stage('Checkout') {
