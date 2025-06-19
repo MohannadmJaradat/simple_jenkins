@@ -34,8 +34,8 @@ pipeline {
         stage("Deploy") {
             steps {
                 sh '''
-                    ssh -o StrictHostKeyChecking=no ubuntu@54.89.162.181 \
-                    'bash -s' < deploy.sh $DEPLOY_BRANCH
+                    echo "Deploying branch: ${DEPLOY_BRANCH} locally..."
+                    sh './deploy.sh ${DEPLOY_BRANCH}'
                 '''
             }
         }
@@ -65,10 +65,6 @@ pipeline {
         }
         fixed {
             echo "This will run if the previous run failed or unstable and now is successful"
-        }
-        cleanup {
-            echo "Cleaning the workspace...."
-            cleanWs()
         }
     }
 }
