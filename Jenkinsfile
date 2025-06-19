@@ -4,6 +4,11 @@ pipeline {
         stage("Build") {
             steps {
                 echo "Building the app..."
+                sh '''
+                    echo "Executing df -h"
+                    df -h
+                    echo "Done executing df -h"
+                '''
             }
         }
         stage("Test") {
