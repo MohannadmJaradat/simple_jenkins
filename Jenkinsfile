@@ -41,8 +41,8 @@ pipeline {
         failure {
             echo "This will run if the job failed"
             mail to: 'mohannad.jaradat@cirrusgo.com',
-            subject: "✅ Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-            body: "The build was successful.\n\nSee: ${env.BUILD_URL}"
+            subject: "❌ Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: "The build has failed.\n\nCheck the console: ${env.BUILD_URL}"
         }
         unstable {
             echo "This will run if the completion status was 'unstable', usually by test failures"
