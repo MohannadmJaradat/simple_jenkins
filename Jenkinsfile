@@ -6,9 +6,10 @@ pipeline {
         AWS_SECRET_ACCESS_KEY_ID= credentials('aws-secret-access-key')
     }
     stages {
-        stage('Checkout') {
+        stage('Clone Repo') {
             steps {
-                git 'git@github.com:mohannad-jaradat/simple_jenkins.git'
+                git credentialsId: 'jenkins2_ssh_priv_key',
+                    url: 'git@github.com:mohannad-jaradat/simple_jenkins.git'
             }
         }
         stage("Build") {
