@@ -6,15 +6,6 @@ pipeline {
         AWS_SECRET_ACCESS_KEY_ID= credentials('aws-secret-access-key')
     }
     stages {
-        stage('Clone Repo') {
-            steps {
-                git(
-                    branch: 'deploy-py-app',
-                    credentialsId: 'jenkins2_ssh_priv_key',
-                    url: 'git@github.com:mohannad-jaradat/simple_jenkins.git'
-                )
-            }
-        }
         stage("Build") {
             steps {
                 echo "Building the app..."
@@ -46,9 +37,6 @@ pipeline {
             mail to: 'mohannad.jaradat@cirrusgo.com',
             subject: "✅ Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
             body: "The build was successful.\n\nSee: ${env.BUILD_URL}"
-            git(
-                echo "This was triggered by ${env.BRANCH_NAME}"
-            )
         }
         failure {
             echo "This will run if the job failed"
