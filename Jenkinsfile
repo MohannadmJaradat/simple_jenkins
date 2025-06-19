@@ -8,9 +8,11 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                git branch: 'start_here',
-                git credentialsId: 'jenkins2_ssh_priv_key',
-                    url: 'git@github.com:mohannad-jaradat/simple_jenkins.git'
+                git(
+                    git branch: 'start_here',
+                    git credentialsId: 'jenkins2_ssh_priv_key',
+                        url: 'git@github.com:mohannad-jaradat/simple_jenkins.git'
+                )
             }
         }
         stage("Build") {
