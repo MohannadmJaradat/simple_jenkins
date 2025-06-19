@@ -35,7 +35,7 @@ pipeline {
             steps {
                 sh '''
                     echo "Deploying branch: ${DEPLOY_BRANCH} locally..."
-                    sh './deploy.sh ${DEPLOY_BRANCH}'
+                    bash /srv/streamlit_app/simple_jenkins/streamlit_app/deploy.sh ${DEPLOY_BRANCH}
                 '''
             }
         }
