@@ -37,7 +37,7 @@ pipeline {
             steps {
                 sh '''
                     . venv/bin/activate
-                    flake8 . > lint_report.txt || true
+                    flake8 /srv/streamlit_app/simple_jenkins/streamlit_app/app.py > lint_report.txt || true
                 '''
                 archiveArtifacts artifacts: 'lint_report.txt'
             }

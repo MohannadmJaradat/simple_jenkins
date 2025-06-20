@@ -44,4 +44,4 @@ sudo systemctl restart streamlit-app
 #     --server.headless true \
 #     --server.enableCORS false" > streamlit.log 2>&1 &
 
-echo "✅ Deployment finished! App running at: http://3.83.229.104:8501/"
+echo "✅ Deployment finished! App running at: http://34.229.206.198:8501/"
