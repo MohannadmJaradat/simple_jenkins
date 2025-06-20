@@ -40,6 +40,7 @@ nohup streamlit run app.py \
     --server.port 8501 \
     --server.address 3.83.229.104 \
     --server.enableCORS false \
+    --server.headless true \
     > streamlit.log 2>&1 &
 
 echo "✅ Deployment finished! App running at: http://<your-server-ip>:8501"
