@@ -29,8 +29,8 @@ pipeline {
                     . venv/bin/activate
                     pip install -r /srv/streamlit_app/simple_jenkins/streamlit_app/requirements.txt
                     tar -czf app.tar.gz /srv/streamlit_app/simple_jenkins/
-                    archiveArtifacts 'app.tar.gz'
                 '''
+                archiveArtifacts 'app.tar.gz'
                 echo "The author's name is: ${AUTHOR_NAME}"
             }
         }
