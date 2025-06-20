@@ -17,7 +17,7 @@ pipeline {
                 echo "Building the app..."
                 sh '''
                     python3 -m venv venv
-                    source venv/bin/activate
+                    . venv/bin/activate
                     pip install -r requirements.txt
                 '''
                 echo "The author's name is: ${AUTHOR_NAME}"
@@ -26,7 +26,7 @@ pipeline {
         stage("Test") {
             steps {
                 sh '''
-                    source venv/bin/activate
+                    . venv/bin/activate
                     pytest
                 '''
             }
