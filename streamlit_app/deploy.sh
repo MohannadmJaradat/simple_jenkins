@@ -38,7 +38,7 @@ echo "🚦 Restarting Streamlit app..."
 pkill streamlit || true
 nohup streamlit run app.py \
     --server.port 8501 \
-    --server.address 0.0.0.0 \
+    --server.address 3.83.229.104 \
     --server.enableCORS false \
     > streamlit.log 2>&1 &
 
