@@ -43,4 +43,4 @@ nohup streamlit run app.py \
     --server.headless true \
     > streamlit.log 2>&1 &
 
-echo "✅ Deployment finished! App running at: http://<your-server-ip>:8501"
+echo "✅ Deployment finished! App running at: http://3.83.229.104:8501/"
