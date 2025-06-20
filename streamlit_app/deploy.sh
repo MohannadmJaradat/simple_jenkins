@@ -36,11 +36,10 @@ pip install -r requirements.txt
 # Restart Streamlit
 echo "🚦 Restarting Streamlit app..."
 pkill streamlit || true
-nohup streamlit run app.py \
+nohup bash -c "source venv/bin/activate && streamlit run app.py \
     --server.port 8501 \
     --server.address 0.0.0.0 \
-    --server.enableCORS false \
     --server.headless true \
-    > streamlit.log 2>&1 &
+    --server.enableCORS false" > streamlit.log 2>&1 &
 
 echo "✅ Deployment finished! App running at: http://3.83.229.104:8501/"
