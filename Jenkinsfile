@@ -27,6 +27,7 @@ pipeline {
                 sh '''
                     python3 -m venv venv
                     . venv/bin/activate
+                    pip install --upgrade pip
                     pip install -r /srv/streamlit_app/simple_jenkins/streamlit_app/requirements.txt
                     tar -czf app.tar.gz /srv/streamlit_app/simple_jenkins/
                 '''
