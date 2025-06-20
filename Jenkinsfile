@@ -34,6 +34,7 @@ pipeline {
         stage("Deploy") {
             steps {
                 sh '''
+                    chmod +x /srv/streamlit_app/simple_jenkins/streamlit_app/deploy.sh
                     echo "Deploying branch: ${DEPLOY_BRANCH} locally..."
                     bash /srv/streamlit_app/simple_jenkins/streamlit_app/deploy.sh ${DEPLOY_BRANCH}
                 '''
