@@ -15,7 +15,7 @@ pipeline {
         stage("Lint") {
             steps {
                 sh '''
-                    source venv/bin/activate
+                    . venv/bin/activate
                     flake8 . > lint_report.txt || true
                 '''
                 archiveArtifacts artifacts: 'lint_report.txt'
