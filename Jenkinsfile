@@ -18,7 +18,7 @@ pipeline {
                 sh '''
                     python3 -m venv venv
                     . venv/bin/activate
-                    pip install -r requirements.txt
+                    pip install -r /srv/streamlit_app/simple_jenkins/streamlit_app/requirements.txt
                 '''
                 echo "The author's name is: ${AUTHOR_NAME}"
             }
