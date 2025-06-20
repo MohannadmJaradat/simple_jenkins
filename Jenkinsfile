@@ -12,6 +12,15 @@ pipeline {
                 checkout scm
             }
         }
+        stage("Lint") {
+            steps {
+                sh '''
+                    source venv/bin/activate
+                    flake8 . > lint_report.txt || true
+                '''
+                archiveArtifacts artifacts: 'lint_report.txt'
+            }
+        }
         stage("Build") {
             steps {
                 echo "Building the app..."
@@ -19,6 +28,8 @@ pipeline {
                     python3 -m venv venv
                     . venv/bin/activate
                     pip install -r /srv/streamlit_app/simple_jenkins/streamlit_app/requirements.txt
+                    tar -czf app.tar.gz /srv/streamlit_app/simple_jenkins/
+                    archiveArtifacts 'app.tar.gz'
                 '''
                 echo "The author's name is: ${AUTHOR_NAME}"
             }
@@ -27,8 +38,9 @@ pipeline {
             steps {
                 sh '''
                     . venv/bin/activate
-                    pytest
+                    pytest --cov=. > coverage.txt
                 '''
+                archiveArtifacts artifacts: 'coverage.txt'
             }
         }
         stage("Deploy") {
@@ -41,9 +53,12 @@ pipeline {
             }
         }
     }
-    post{
+    post {
         always {
             echo "This will always run regardless of the completion status"
+            mail to: 'mohannad.jaradat@cirrusgo.com',
+            subject: "📦 Pipeline Completed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: "The pipeline has completed (success, failure, or otherwise).\n\nSee: ${env.BUILD_URL}"
         }
         success {
             echo "This will run if the build succeeded"
@@ -59,13 +74,27 @@ pipeline {
         }
         unstable {
             echo "This will run if the completion status was 'unstable', usually by test failures"
+            mail to: 'mohannad.jaradat@cirrusgo.com',
+            subject: "⚠️ Build Unstable: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: "The build is unstable, usually due to test failures.\n\nSee: ${env.BUILD_URL}"
         }
         changed {
             echo "This will run if the state of the pipeline has changed"
             echo "For example, if the previous run failed but is now successful"
+            mail to: 'mohannad.jaradat@cirrusgo.com',
+            subject: "🔁 Pipeline State Changed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: "The build status has changed from the last run (e.g., failed to passed).\n\nSee: ${env.BUILD_URL}"
         }
         fixed {
             echo "This will run if the previous run failed or unstable and now is successful"
+            mail to: 'mohannad.jaradat@cirrusgo.com',
+            subject: "🔧 Build Fixed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: "The build is now successful after previously failing or being unstable.\n\nSee: ${env.BUILD_URL}"
         }
+        // cleanup {
+        //     echo "🧹 Cleaning the workspace...."
+        //     cleanWs()
+        // }
     }
+
 }
