@@ -12,6 +12,27 @@ pipeline {
                 checkout scm
             }
         }
+        stage('Pull Repo') {
+            steps {
+                echo "📥 Pulling latest changes from branch: ${DEPLOY_BRANCH}"
+                sh '''
+                    APP_BASE="/srv/streamlit_app"
+                    REPO_URL="git@github.com:mohannad-jaradat/simple_jenkins.git"
+                    BRANCH="${DEPLOY_BRANCH}"
+
+                    if [ ! -d "$APP_BASE/simple_jenkins/.git" ]; then
+                        echo "📦 Cloning repository..."
+                        git clone -b "$BRANCH" "$REPO_URL" "$APP_BASE/simple_jenkins"
+                    else
+                        echo "🔄 Pulling latest changes..."
+                        cd "$APP_BASE/simple_jenkins"
+                        git fetch origin
+                        git checkout "$BRANCH"
+                        git reset --hard "origin/$BRANCH"
+                    fi
+                '''
+            }
+        }
         stage("Lint") {
             steps {
                 sh '''
