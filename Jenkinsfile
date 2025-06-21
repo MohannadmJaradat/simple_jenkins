@@ -85,7 +85,7 @@ pipeline {
                 sshagent(credentials: ['app-server-key']) {
                     sh '''
                         echo "📤 Copying files to remote server..."
-                        scp -r /srv/streamlit_app/simple_jenkins/* ${REMOTE_USER}@${REMOTE_IP}:${REMOTE_PATH}
+                        scp -o StrictHostKeyChecking=no -r /srv/streamlit_app/simple_jenkins/* ${REMOTE_USER}@${REMOTE_IP}:${REMOTE_PATH}
 
                         echo "🚀 Executing deploy.sh on remote server..."
                         ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_IP} "chmod +x ${REMOTE_DEPLOY_SCRIPT} && bash ${REMOTE_DEPLOY_SCRIPT}"
