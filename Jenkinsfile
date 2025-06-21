@@ -78,8 +78,8 @@ pipeline {
             environment {
                 REMOTE_USER = 'ubuntu' // or ec2-user, jenkins, etc.
                 REMOTE_IP = '172.31.23.76'
-                REMOTE_PATH = '/srv/streamlit/streamlit_app/simple_jenkins/'
-                REMOTE_DEPLOY_SCRIPT = '/srv/streamlit/streamlit_app/simple_jenkins/streamlit_app/deploy.sh'
+                REMOTE_PATH = '/srv/streamlit_app/simple_jenkins/'
+                REMOTE_DEPLOY_SCRIPT = '/srv/streamlit_app/simple_jenkins/streamlit_app/deploy-to-remote.sh'
             }
             steps {
                 sshagent(credentials: ['app-server-key']) {
@@ -90,7 +90,7 @@ pipeline {
                         echo "📤 Copying files to remote server..."
                         scp -o StrictHostKeyChecking=no -r /srv/streamlit_app/simple_jenkins/* ${REMOTE_USER}@${REMOTE_IP}:${REMOTE_PATH}
 
-                        echo "🚀 Executing deploy.sh on remote server..."
+                        echo "🚀 Executing deploy-to-remote.sh on remote server..."
                         ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_IP} "chmod +x ${REMOTE_DEPLOY_SCRIPT} && bash ${REMOTE_DEPLOY_SCRIPT}"
                     '''
                 }

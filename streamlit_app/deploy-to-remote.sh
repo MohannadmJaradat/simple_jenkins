@@ -12,16 +12,16 @@ APP_DIR="$APP_BASE/simple_jenkins/streamlit_app"
 echo "🚀 Deploying branch: $BRANCH"
 
 # Clone repo if not present
-if [ ! -d "$APP_BASE/simple_jenkins/.git" ]; then
-    echo "📦 Cloning repository..."
-    git clone -b "$BRANCH" "$REPO_URL" "$APP_BASE/simple_jenkins"
-else
-    echo "🔄 Pulling latest changes..."
-    cd "$APP_BASE/simple_jenkins"
-    git fetch origin
-    git checkout "$BRANCH"
-    git reset --hard "origin/$BRANCH"
-fi
+# if [ ! -d "$APP_BASE/simple_jenkins/.git" ]; then
+#     echo "📦 Cloning repository..."
+#     git clone -b "$BRANCH" "$REPO_URL" "$APP_BASE/simple_jenkins"
+# else
+#     echo "🔄 Pulling latest changes..."
+#     cd "$APP_BASE/simple_jenkins"
+#     git fetch origin
+#     git checkout "$BRANCH"
+#     git reset --hard "origin/$BRANCH"
+# fi
 
 # Go to app directory
 cd "$APP_DIR"
