@@ -17,7 +17,7 @@ pipeline {
                 echo "📥 Pulling latest changes from branch: ${DEPLOY_BRANCH}"
                 sh '''
                     APP_BASE="/srv/streamlit_app"
-                    REPO_URL="git@github.com:mohannad-jaradat/simple_jenkins.git"
+                    REPO_URL="git@github.com:MohannadmJaradat/simple_jenkins.git"
                     BRANCH="${DEPLOY_BRANCH}"
 
                     if [ ! -d "$APP_BASE/simple_jenkins/.git" ]; then

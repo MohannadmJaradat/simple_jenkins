@@ -61,27 +61,21 @@ git clone https://github.com/MohannadmJaradat/simple_jenkins.git
 cd simple_jenkins/streamlit_app
 ```
 
-### 2. Make the deploy.sh script executable
-
-```bash
-chmod +x deploy.sh
-```
-
-### 3. Create and activate a virtual environment
+### 2. Create and activate a virtual environment
 
 ```bash
 python3 -m venv venv
 . venv/bin/activate
 ```
 
-### 4. Install dependencies
+### 3. Install dependencies
 
 ```bash
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 5. Run the Streamlit app
+### 4. Run the Streamlit app
 
 To start the Streamlit app manually, use the following command:
 
@@ -94,7 +88,7 @@ To start the Streamlit app manually, use the following command:
 streamlit run app.py --server.port 8501 --server.address 0.0.0.0 --server.headless true
 ```
 
-### 6. Access the app
+### 5. Access the app
 
 Once the app is running, open your browser and navigate to:
 
