@@ -85,6 +85,7 @@ pipeline {
                 sshagent(credentials: ['app-server-key']) {
                     sh '''
                         echo "📤 Copying files to remote server..."
+                        cd /srv
                         scp -r ./streamlit_app ${REMOTE_USER}@${REMOTE_IP}:${REMOTE_PATH}
 
                         echo "🚀 Executing deploy.sh on remote server..."
