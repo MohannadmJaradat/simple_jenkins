@@ -77,7 +77,7 @@ pipeline {
         stage('Deploy to Remote Server') {// This is an optional stage in case you want to deploy the streamlit app on a separate server
             environment {
                 REMOTE_USER = 'ubuntu' // or ec2-user, jenkins, etc.
-                REMOTE_IP = '44.220.145.35'
+                REMOTE_IP = '172.31.23.76'
                 REMOTE_PATH = '/srv/streamlit_app/simple_jenkins/'
                 REMOTE_DEPLOY_SCRIPT = '/srv/streamlit_app/simple_jenkins/streamlit_app/deploy.sh'
             }
