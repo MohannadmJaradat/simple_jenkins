@@ -74,28 +74,6 @@ pipeline {
                 '''
             }
         }
-        stage('Deploy to Remote Server') {// This is an optional stage in case you want to deploy the streamlit app on a separate server
-            environment {
-                REMOTE_USER = 'ubuntu' // or ec2-user, jenkins, etc.
-                REMOTE_IP = '172.31.23.76'
-                REMOTE_PATH = '/srv/streamlit_app/simple_jenkins/'
-                REMOTE_DEPLOY_SCRIPT = '/srv/streamlit_app/simple_jenkins/streamlit_app/deploy-to-remote.sh'
-            }
-            steps {
-                sshagent(credentials: ['app-server-key']) {
-                    sh '''
-                        echo "📁 Ensuring remote path exists..."
-                        ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_IP} "sudo mkdir -p ${REMOTE_PATH} && sudo chown -R ${REMOTE_USER}:${REMOTE_USER} ${REMOTE_PATH}"
-
-                        echo "📤 Copying files to remote server..."
-                        scp -o StrictHostKeyChecking=no -r /srv/streamlit_app/simple_jenkins/* ${REMOTE_USER}@${REMOTE_IP}:${REMOTE_PATH}
-
-                        echo "🚀 Executing deploy-to-remote.sh on remote server..."
-                        ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_IP} "chmod +x ${REMOTE_DEPLOY_SCRIPT} && bash ${REMOTE_DEPLOY_SCRIPT}"
-                    '''
-                }
-            }
-        }
     }
     post {
         always {
