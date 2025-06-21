@@ -78,8 +78,8 @@ pipeline {
             environment {
                 REMOTE_USER = 'ubuntu' // or ec2-user, jenkins, etc.
                 REMOTE_IP = '172.31.23.76'
-                REMOTE_PATH = '/srv/streamlit_app/simple_jenkins/'
-                REMOTE_DEPLOY_SCRIPT = '/srv/streamlit_app/simple_jenkins/streamlit_app/deploy.sh'
+                REMOTE_PATH = '/home/ubuntu/streamlit_app/simple_jenkins/'
+                REMOTE_DEPLOY_SCRIPT = '/home/ubuntu/streamlit_app/simple_jenkins/streamlit_app/deploy.sh'
             }
             steps {
                 sshagent(credentials: ['app-server-key']) {
