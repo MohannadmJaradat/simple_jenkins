@@ -84,6 +84,9 @@ pipeline {
             steps {
                 sshagent(credentials: ['app-server-key']) {
                     sh '''
+                        echo "📁 Ensuring remote path exists..."
+                        ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_IP} "mkdir -p ${REMOTE_PATH}"
+
                         echo "📤 Copying files to remote server..."
                         scp -o StrictHostKeyChecking=no -r /srv/streamlit_app/simple_jenkins/* ${REMOTE_USER}@${REMOTE_IP}:${REMOTE_PATH}
 
