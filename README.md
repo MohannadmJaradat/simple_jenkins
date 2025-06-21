@@ -23,7 +23,7 @@ simple_jenkins/
 
 ## 🚀 Manual Setup & Running the App
 
-### 1. Clone the repository
+### 1. Fork and clone the repository
 
 > **🔐 First time setup?** Generate and configure your SSH key:
 
@@ -55,9 +55,11 @@ If successful, you'll see a message like:
 Hi username! You've successfully authenticated, but GitHub does not provide shell access.
 ```
 
-Now you're ready to clone the repo:
+Now you're ready to fork and clone the repo:
+1. Fork the original repository to your own GitHub account.
+2. clone **your fork** using SSH:
 ```bash
-git clone https://github.com/MohannadmJaradat/simple_jenkins.git
+git clone git@github.com:<your-username>/simple_jenkins.git
 cd simple_jenkins/streamlit_app
 ```
 
@@ -79,14 +81,14 @@ pip install -r requirements.txt
 
 To start the Streamlit app manually, use the following command:
 
+```bash
+streamlit run app.py --server.port 8501 --server.address 0.0.0.0 --server.headless true
+```
+
 ### 🔍 Explanation of Flags:
 - `--server.port 8501`: Specifies the port number (default: 8501).
 - `--server.address 0.0.0.0`: Binds the app to all interfaces (public access).
 - `--server.headless true`: Enables headless mode (ideal for servers).
-
-```bash
-streamlit run app.py --server.port 8501 --server.address 0.0.0.0 --server.headless true
-```
 
 ### 5. Access the app
 
